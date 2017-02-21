@@ -9,17 +9,11 @@ namespace StudentsWebsite.Controllers
 {
     public class HomeController : Controller
     {
-        UniversityDB univDB = new UniversityDB();
-
+        
         public ActionResult Index()
         {
-            return View(univDB.Students);
+            return View();
         }
-
-        protected override void Dispose(bool disposing)
-        {
-            univDB.Dispose();
-            base.Dispose(disposing);
-        }
+        
     }
 }
