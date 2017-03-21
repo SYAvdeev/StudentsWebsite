@@ -1,5 +1,4 @@
 ﻿@model StudentsWebsite.Models.Student
-
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/Layout.cshtml";
@@ -11,7 +10,7 @@
     <h4>Student</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
+        <dt style="font-weight:bold">
             @Html.DisplayNameFor(model => model.FirstName)
         </dt>
 
@@ -19,17 +18,31 @@
             @Html.DisplayFor(model => model.FirstName)
         </dd>
 
-        <dt>
+        <dt style="font-weight:bold">
             @Html.DisplayNameFor(model => model.LastName)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.LastName)
         </dd>
-
     </dl>
+    <table class="table">
+        <tr>
+            <td style="font-weight:bold">@Html.Label("Course name")</td>
+            <td style="font-weight:bold">@Html.Label("Grade")</td>
+            <td style="font-weight:bold">@Html.Label("Professor")</td>
+        </tr>
+        @foreach(var curEnr in Model.Enrollments)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => curEnr.Professor.Course)</td>
+                <td>@Html.DisplayFor(modelItem => curEnr.Grade)</td>
+                <td>@Html.DisplayFor(modelItem => (curEnr.Professor.FullName))</td>
+            </tr>
+        }
+    </table>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.StudentID }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
