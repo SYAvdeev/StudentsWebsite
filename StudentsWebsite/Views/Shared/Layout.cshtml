@@ -14,14 +14,43 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Главная", "Index", "Home")</li>
-                <li>@Html.ActionLink("Регистрация", "Register", "Account")</li>
+                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    @:<li>@Html.ActionLink("Log in", "Login", "Account")</li>
+                }
+                @if (User.Identity.IsAuthenticated)
+                {
+                    
+                    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <li>
+                            <input type="submit" value="Log off"/>
+                        </li>
+
+                            <!--<a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>-->
+                            }
+                            }
+                            @if (User.IsInRole("Admin") || User.IsInRole("Professor"))
+                            {
+                                @:
+                                <li>@Html.ActionLink("Register new User", "Register", "Account")</li>
+                }
+                
                 <li>@Html.ActionLink("Students", "Index", "Students")</li>
                 <li>@Html.ActionLink("Professors", "Index", "Professors")</li>
                 <li>@Html.ActionLink("Statistics", "Index", "Statistics")</li>
             </ul>
         </div>
     </div>
-    @RenderBody()
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>@DateTime.Now.Date</p>
+        </footer>
+    </div>
 </body>
 </html>

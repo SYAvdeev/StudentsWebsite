@@ -81,3 +81,5 @@ D:\TortFolder\StudentsWebsite\StudentsWebsite\bin\PagedList.Mvc.xml
 D:\TortFolder\StudentsWebsite\StudentsWebsite\obj\Debug\StudentsWebsite.Migrations.Initial.resources
 D:\TortFolder\StudentsWebsite\StudentsWebsite\obj\Debug\StudentsWebsite.csproj.GenerateResource.Cache
 D:\TortFolder\StudentsWebsite\StudentsWebsite\obj\Debug\StudentsWebsite.Migrations._2.resources
+D:\TortFolder\StudentsWebsite\StudentsWebsite\obj\Debug\StudentsWebsite.Migrations._3.resources
+D:\TortFolder\StudentsWebsite\StudentsWebsite\obj\Debug\StudentsWebsite.Migrations._4.resources
