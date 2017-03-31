@@ -1,0 +1,21 @@
+﻿@model StudentsWebsite.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+
+<h2>Register</h2>
+
+
+<ul class="form-horizontal">
+    @if (User.IsInRole("Admin") || User.IsInRole("Professor"))
+    {
+        @:<li>@Html.ActionLink("Register new student", "Create", "Students")</li>
+    }
+    @if (User.IsInRole("Admin"))
+    {
+        @:<li>@Html.ActionLink("Register new professor", "Create", "Professors")</li>
+    }
+</ul>
+

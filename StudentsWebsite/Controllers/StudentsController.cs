@@ -122,7 +122,7 @@ namespace StudentsWebsite.Controllers
         {
             var student = new Student();
             student.Enrollments = new List<Enrollment>();
-            PopulateAssignedProfessors(student);
+            PopulateAssignedCourses(student);
             return View();
         }
 
@@ -162,11 +162,11 @@ namespace StudentsWebsite.Controllers
                 db.SaveChanges();
             }
 
-            PopulateAssignedProfessors(student);
+            PopulateAssignedCourses(student);
             return RedirectToAction("Index");
         }
 
-        private void PopulateAssignedProfessors(Student student)
+        private void PopulateAssignedCourses(Student student)
         {
             var db = HttpContext.GetOwinContext().Get<ApplicationDbContext>();
 
@@ -175,11 +175,13 @@ namespace StudentsWebsite.Controllers
             var viewModel = new List<ProfessorAssignedViewModel>();
             foreach (var professor in allProfessors)
             {
+                bool contains = studentsProfessors.Contains(professor.ID);
                 viewModel.Add(new ProfessorAssignedViewModel
                 {
                     ProfessorID = professor.ID,
                     Course = professor.Course,
-                    Assigned = studentsProfessors.Contains(professor.ID)
+                    Assigned = contains,
+                    Grade = contains ? professor.Enrollments.Where(e => e.StudentID == student.ID).Select(e => e.Grade).FirstOrDefault() : null
                 });
             }
             ViewBag.Professors = viewModel;
@@ -210,7 +212,7 @@ namespace StudentsWebsite.Controllers
             {
                 return HttpNotFound();
             }
-            PopulateAssignedProfessors(student);
+            PopulateAssignedCourses(student);
             return View(editModel);
         }
 
@@ -220,10 +222,44 @@ namespace StudentsWebsite.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin,Professor")]
-        public async Task<ActionResult> Edit(RegisterViewModel registerModel, string[] selectedProfessors, string[] grades, int id)
+        public async Task<ActionResult> Edit(RegisterViewModel registerModel, string[] selectedProfessors, string[] grades, int? id)
         {
-            var student = new Student() { FirstName = registerModel.FirstName, LastName = registerModel.LastName };
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var db = HttpContext.GetOwinContext().Get<ApplicationDbContext>();
+
+            var studentToUpdate = db.Students
+               .Include(i => i.Enrollments)
+               .Where(i => i.ID == id)
+               .Single();
+
+            if (TryUpdateModel(studentToUpdate, "", new string[] { "LastName", "FirstName" }))
+            {
+                try
+                {
+                    UpdateStudentEnrollments(selectedProfessors, studentToUpdate);
+
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+                catch (RetryLimitExceededException /* dex */)
+                {
+                    //Log the error (uncomment dex variable name and add a line here to write a log.
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                }
+            }
+
+
+
+                var student = new Student() { FirstName = registerModel.FirstName, LastName = registerModel.LastName };
             student.Enrollments = new List<Enrollment>();
+
+            
+
 
             if (ModelState.IsValid)
             {
@@ -245,12 +281,16 @@ namespace StudentsWebsite.Controllers
                 var user = new ApplicationUser { UserName = registerModel.Login };
                 await UserManager.CreateAsync(user, registerModel.Password);
                 student.User = UserManager.FindByName(registerModel.Login);
-                var db = HttpContext.GetOwinContext().Get<ApplicationDbContext>();
+                
+
+                var studentToUpdate = db.Students.Find(id);
+                TryUpdateModel(studentToUpdate, )
+
                 db.Students.Add(student);
                 db.SaveChanges();
             }
 
-            PopulateAssignedProfessors(student);
+            PopulateAssignedCourses(student);
             return RedirectToAction("Index");
         }
 

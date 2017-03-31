@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Statistics page";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2>Register</h2>
+
+<div>
+    <ul class="form-horizontal">
+
+        <li>@Html.ActionLink("Professors with all Students", "AllStudents", "Statistics")</li>
+        <li>@Html.ActionLink("Highest average grade", "HighestGrade", "Statistics")</li>
+        <li>@Html.ActionLink("Professors with the smallest number of students", "LessStudents", "Statistics")</li>
+    </ul>
+</div>

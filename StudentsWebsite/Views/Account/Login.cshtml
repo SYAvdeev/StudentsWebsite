@@ -1,0 +1,24 @@
+﻿@model StudentsWebsite.Models.LoginViewModel
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2>Login</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <label>Электронный адрес</label>
+    @Html.EditorFor(model => model.Login);
+    
+    <label>Пароль</label>
+    @Html.EditorFor(model => model.Password);
+    
+    @Html.Label("Запомнить меня")
+    @Html.CheckBoxFor(model => model.RememberMe);
+    
+    <input type="submit" value="Log in" class="btn btn-default" />
+}

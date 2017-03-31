@@ -76,8 +76,9 @@
                             @professor.ProfessorID
                             @professor.Course
                         </td>
-                        <td>
-                            @Html.DropDownList("grades", new SelectList(new List<int> { 2, 3, 4, 5 }),
+                        <td>                           
+
+                            @Html.DropDownList("grades", new SelectList(new List<int>() { 2, 3, 4, 5}, professor.Grade),
                                                                 "Select grade",
                                                                 new { @class = "form-control" })
 
