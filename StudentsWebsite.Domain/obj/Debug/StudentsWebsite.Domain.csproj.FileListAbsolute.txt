@@ -1,0 +1,15 @@
+D:\TortFolder\StudentsWebsite\StudentsWebsite.Domain\bin\Debug\EntityFramework.dll
+D:\TortFolder\StudentsWebsite\StudentsWebsite.Domain\bin\Debug\EntityFramework.SqlServer.dll
+D:\TortFolder\StudentsWebsite\StudentsWebsite.Domain\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+D:\TortFolder\StudentsWebsite\StudentsWebsite.Domain\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\TortFolder\StudentsWebsite\StudentsWebsite.Domain\bin\Debug\Newtonsoft.Json.dll
+D:\TortFolder\StudentsWebsite\StudentsWebsite.Domain\bin\Debug\EntityFramework.xml
+D:\TortFolder\StudentsWebsite\StudentsWebsite.Domain\bin\Debug\EntityFramework.SqlServer.xml
+D:\TortFolder\StudentsWebsite\StudentsWebsite.Domain\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+D:\TortFolder\StudentsWebsite\StudentsWebsite.Domain\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\TortFolder\StudentsWebsite\StudentsWebsite.Domain\bin\Debug\Newtonsoft.Json.xml
+D:\TortFolder\StudentsWebsite\StudentsWebsite.Domain\bin\Debug\StudentsWebsite.Domain.dll.config
+D:\TortFolder\StudentsWebsite\StudentsWebsite.Domain\bin\Debug\StudentsWebsite.Domain.dll
+D:\TortFolder\StudentsWebsite\StudentsWebsite.Domain\bin\Debug\StudentsWebsite.Domain.pdb
+D:\TortFolder\StudentsWebsite\StudentsWebsite.Domain\obj\Debug\StudentsWebsite.Domain.dll
+D:\TortFolder\StudentsWebsite\StudentsWebsite.Domain\obj\Debug\StudentsWebsite.Domain.pdb
